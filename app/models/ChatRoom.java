@@ -273,17 +273,18 @@ public class ChatRoom extends UntypedActor {
 			//Process messages from the pub/sub channel
 	    	JsonNode parsedMessage = Json.parse(messageBody);
 	    	Object message = null;
-	    	if("talk".equals(parsedMessage.get("type").asText())) {	    		
+	    	String messageType = parsedMessage.get("type").asText();
+	    	if("talk".equals(messageType)) {	    		
 	    		message = new Talk(
 	    				parsedMessage.get("username").asText(), 
 	    				parsedMessage.get("text").asText()
 	    				);
-	    	} else if("rosterNotify".equals(parsedMessage.get("type").asText())) {	
+	    	} else if("rosterNotify".equals(messageType)) {	
 	    		message = new RosterNotification(
 	    				parsedMessage.get("username").asText(),
 	    				parsedMessage.get("direction").asText()
 	    				);
-	    	} else if("quit".equals(parsedMessage.get("type").asText())) {	
+	    	} else if("quit".equals(messageType)) {	
 	    		message = new Quit(
 	    				parsedMessage.get("username").asText() 
 	    				);	    		
