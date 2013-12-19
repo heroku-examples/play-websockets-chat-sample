@@ -1,21 +1,19 @@
-html, body {
+body {
+    padding-top: 50px;
     background-color: #eee;
 }
-body {
-    padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
-}
-.container > footer p {
-    text-align: center; /* center align it with the container */
-}
+
 .container {
-    width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+    max-width: 820px;
 }
 
-/* The white background content wrapper */
+.container > footer p {
+    text-align: center;
+}
+
 .content {
     background-color: #fff;
     padding: 20px;
-    margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
     -webkit-border-radius: 0 0 6px 6px;
        -moz-border-radius: 0 0 6px 6px;
             border-radius: 0 0 6px 6px;
@@ -25,89 +23,16 @@ body {
     min-height: 10px;
 }
 
-/* Page header tweaks */
-.page-header {
-    background-color: #f5f5f5;
-    padding: 20px 20px 10px;
-    margin: -20px -20px 20px;
-}
-
-/* Styles you shouldn't keep as they are for displaying this base example only */
-.content .span10,
-.content .span4 {
-    min-height: 500px;
-}
-
-/* Give a quick and non-cross-browser friendly divider */
-.content .span4 {
-    padding-left: 9px;
-    margin-left: 10px;
-    border-left: 1px solid #eee;
-}
-
-.topbar .btn {
-    border: 0;
-}
-
-.topbar p {
-    color: #888;
-}
-
-#username {
-    width: 200px;
-}
-
-#main {
-    position: relative;
-    overflow: hidden;
-}
-
-#onError, #onChat {
-    display: none;
-}
-
 #messages {
-    position: absolute;
-    bottom: 60px;
-}
-
-#talk {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: auto;
-    height: 40px
-}
-
-.message {
-    padding: 4px 0;
-    border-bottom: 1px solid #eee;
-    position: relative;
+    margin-top: 10px;
 }
 
 .message span {
-    width: 70px;
-    overflow: hidden;
-    text-align: right;
-    font-weight: bold;
-    margin-right: 5px;
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    top: -1px;
+    float: left;
+    margin-top: 2px;
+    width: 80px;
 }
 
 .message p {
-    display: inline-block;
-    margin: 0;
-    width: 500px;
-}
-
-.message.me {
-    background: #FFC;
-}
-
-.message.join, .message.quit {
-    background: #D9E7FB;
+    margin-left: 90px;
 }

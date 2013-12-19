@@ -3,7 +3,6 @@
 $(function() {
     var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
     var chatSocket = new WS("@routes.Application.chat(username).webSocketURL(request)")
-    $("#onChat").show()
 
     var sendMessage = function() {
         chatSocket.send(JSON.stringify(
@@ -26,11 +25,15 @@ $(function() {
             })
         }
         else if (data.type == "talk") {
-            var el = $('<div class="message"><span></span><p></p></div>')
-            $("span", el).text(data.username)
+            var el = $('<div class="message"><span class="label"></span><p></p></div>')
+            var s = $("span", el).text(data.username)
             $("p", el).text(data.message)
             $(el).addClass(data.kind)
-            if(data.username == '@username') $(el).addClass('me')
+            if (data.username == '@username') {
+                $(s).addClass('label-default')
+            } else {
+                $(s).addClass('label-primary')
+            }
             $('#messages').append(el)
         }
     }

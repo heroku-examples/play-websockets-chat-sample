@@ -11,25 +11,27 @@
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))" type="text/javascript"></script>
     </head>
     <body>
-        
-        <div class="topbar">
-            <div class="fill">
-                <div class="container">
-                    <a class="brand" href="@routes.Application.index()">Websocket Chat-Room</a>
-                    
-                    @if(connected != null) {
-                        <p class="pull-right">
-                            Logged in as @connected —
-                            <a href="@routes.Application.index()">Disconnect</a>
-                        </p>
-                    } else {
-                        <form action="@routes.Application.chatRoom()" class="pull-right">
-                            <input id="username" name="username" class="input-small" type="text" placeholder="Username">
-                            <button class="btn" type="submit">Sign in</button>
-                        </form>
-                    }
-                    
+
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="@routes.Application.index()">Websocket Chat-Room</a>
                 </div>
+                @if(connected != null) {
+                    <div class="navbar-right">
+                        <p class="navbar-text">
+                            Logged in as @connected
+                        </p>
+                        <a href="@routes.Application.index()" class="btn btn-default navbar-btn">Disconnect</a>
+                    </div>
+                } else {
+                    <form action="@routes.Application.chatRoom()" class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input id="username" name="username" class="form-control" type="text" placeholder="Username">
+                        </div>
+                        <button class="btn btn-success" type="submit">Sign in</button>
+                    </form>
+                }
             </div>
         </div>
 
