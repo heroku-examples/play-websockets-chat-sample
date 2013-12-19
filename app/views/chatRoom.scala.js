@@ -2,7 +2,8 @@
 
 $(function() {
     var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
- var chatSocket = new WS("@routes.Application.chat(username).webSocketURL(request)")
+    var chatSocket = new WS("@routes.Application.chat(username).webSocketURL(request)")
+    $("#onChat").show()
 
     var sendMessage = function() {
         chatSocket.send(JSON.stringify(
@@ -13,32 +14,25 @@ $(function() {
 
     var receiveEvent = function(event) {
         var data = JSON.parse(event.data)
-
-        // Handle errors
-        if(data.error) {
-            chatSocket.close()
-            $("#onError span").text(data.error)
-            $("#onError").show()
-            return
-        } else {
-            $("#onChat").show()
-        }
-
+        
         // Create the message element
-        var el = $('<div class="message"><span></span><p></p></div>')
-        $("span", el).text(data.user)
-        $("p", el).text(data.message)
-        $(el).addClass(data.kind)
-        if(data.user == '@username') $(el).addClass('me')
-        $('#messages').append(el)
-
-        // Update the members list
-        $("#members").html('')
-        $(data.members).each(function() {
-            var li = document.createElement('li');
-            li.textContent = this;
-            $("#members").append(li);
-        })
+        if (data.type == "members") {
+            // Update the members list
+            $("#members").html('')
+            $(data.members).each(function() {
+                var li = document.createElement('li');
+                li.textContent = this;
+                $("#members").append(li);
+            })
+        }
+        else if (data.type == "talk") {
+            var el = $('<div class="message"><span></span><p></p></div>')
+            $("span", el).text(data.username)
+            $("p", el).text(data.message)
+            $(el).addClass(data.kind)
+            if(data.username == '@username') $(el).addClass('me')
+            $('#messages').append(el)
+        }
     }
 
     var handleReturnKey = function(e) {
